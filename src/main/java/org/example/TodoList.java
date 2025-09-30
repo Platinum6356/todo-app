@@ -1,6 +1,6 @@
 package  org.example;
 
-import java.itul.Arraylist;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TodoList
@@ -29,7 +29,7 @@ public class TodoList
     }
 
     public int size(){
-        retirn items.size();
+        return items.size();
     }
 
 }
