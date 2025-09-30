@@ -37,18 +37,7 @@ jobs:
       - name: Get project version
         id: get_version
         run: |
-          # Проверяем существование файла
-          if [ -f gradle.properties ]; then
-            echo "gradle.properties exists"
-            cat gradle.properties
-          else
-            echo "gradle.properties not found"
-            ls -la
-          fi
-          
-          # Пробуем разные способы извлечения версии
-          VERSION=$(grep '^version' gradle.properties | cut -d'=' -f2 | tr -d ' \r\n')
-          echo "Extracted version: '$VERSION'"
+          VERSION=$(grep '^version=' gradle.properties | cut -d'=' -f2)
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Debug version output
