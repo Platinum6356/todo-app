@@ -38,6 +38,37 @@ public class TodoApp{
                         System.out.println("Usage: remove <index>");
                     }
                     break;
+                case "clear":
+                    list.clearAll();
+                    System.out.println("All tasks cleared.");
+                    break;
+                case "done":
+                    if (parts.length > 1) {
+                        try {
+                            int idx = Integer.parseInt(parts[1]);
+                            if (list.markDone(idx)) System.out.println("Task marked as done.");
+                            else System.out.println("Index out of range.");
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid index.");
+                        }
+                    } else {
+                        System.out.println("Usage: done <index>");
+                    }
+                    break;
+                case "search":
+                    if (parts.length > 1) {
+                        List<String> found = list.search(parts[1]);
+                        if (found.isEmpty()) {
+                            System.out.println("No tasks found.");
+                        } else {
+                            for (String task : found) {
+                                System.out.println(task);
+                            }
+                        }
+                    } else {
+                        System.out.println("Usage: search <substring>");
+                    }
+                    break;
                 case "list":
                     List<String> all = list.getAll();
                     for (int i = 0; i < all.size(); i++){
@@ -50,7 +81,7 @@ public class TodoApp{
                     scanner.close();
                     return;
                 default:
-                    System.out.println("Unknown command. Commands: add, remove, list, exit");
+                    System.out.println("Unknown command. Commands: add, remove, clear, done, search, list, exit");
             }
         }
     }
